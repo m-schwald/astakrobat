@@ -1,0 +1,11 @@
+# Aktiviert mod_rewrite
+RewriteEngine On
+
+# Weiterleitung von .html auf die URL ohne .html
+RewriteCond %{THE_REQUEST} \s/+(.+)\.html [NC]
+RewriteRule ^ %1 [R=301,L]
+
+# Leitet Anfragen ohne .html zur tatsächlichen Datei weiter
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ $1.html [L,QSA]
